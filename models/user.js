@@ -30,9 +30,9 @@ userSchema.methods.comparePassword = function(password) {
     });
 };
 
-// userSchema.methods.generateToken = function() {
-  
-// };
+userSchema.methods.generateToken = function() {
+  return jwt.sign({id: this._id}, process.env.SECRET);
+};
 
 // preSave generate hash, generate token 
 
