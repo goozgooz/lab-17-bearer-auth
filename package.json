@@ -16,5 +16,15 @@
   "bugs": {
     "url": "https://github.com/goozgooz/lab-16-basic-auth/issues"
   },
-  "homepage": "https://github.com/goozgooz/lab-16-basic-auth#readme"
+  "homepage": "https://github.com/goozgooz/lab-16-basic-auth#readme",
+  "dependencies": {
+    "bcrypt": "latest",
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "jest": "^21.2.1",
+    "jsonwebtoken": "latest",
+    "mongoose": "^4.13.0",
+    "superagent": "^3.8.0"
+  }
 }
