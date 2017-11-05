@@ -18,14 +18,11 @@ userSchema.methods.generateHash = function(password) {
 };
 
 userSchema.methods.comparePassword = function(password) {
-  console.log('comparing');
   return bcrypt.compare(password,this.password)
     .then(res => {
       if(res) {
-        console.log('correct password');
         return this;
       }
-      console.log('wrong password');
       throw new Error('incorrect password');
     });
 };
