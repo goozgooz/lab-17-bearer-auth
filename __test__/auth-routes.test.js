@@ -4,7 +4,8 @@
 const request = require('superagent');
 const server = require('../lib/server.js');
 const User = require('../models/user.js');
-require('./lib/test-env.js');
+const jwt = require('jsonwebtoken');
+require('./lib/test-env.js');  // mock .env for test 
 
 // helper stuff for tests
 const url = 'http://localhost:3000';
@@ -65,6 +66,7 @@ describe('auth router', () => {
         .auth('goozgooz','derp')
         .then(res => {
           expect(res.status).toBe(200);
+          // console.log(jwt.verify(res.text, process.env.SECRET));
         });
     });
   });
