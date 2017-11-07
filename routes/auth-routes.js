@@ -8,8 +8,8 @@ const bearAuth = require('../lib/bear-auth.js');
 const authRouter = module.exports = require('express').Router();
 
 authRouter.post('/signup', jsonParser, (req,res,next) => {
-  if(!req.body.username) return res.status(400).send('no username given');
-  if(!req.body.password) return res.status(400).send('no password given');
+  if(!req.body.username) return res.send(400, 'no username given');
+  if(!req.body.password) return res.send(400, 'no password given');
   let password = req.body.password;
   delete req.body.password;
   (new User(req.body)).generateHash(password)
@@ -31,10 +31,11 @@ authRouter.get('/signin', basicHTTP, (req,res,next) => {
     });
 });
 
-authRouter.put('/update', bearAuth, (req,res,next) => {
+authRouter.put('/update', bearAuth, jsonParser, (req,res,next) => {
   User.findOne({_id: req.userId})
     .then(user => {
       if(!user) res.status(404).send('user not found');
+      
       res.status(200).send(user);
     })
     .catch(next);
