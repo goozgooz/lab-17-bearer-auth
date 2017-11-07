@@ -15,6 +15,8 @@ const newUser = {
   password: 'derp',
 };
 
+let userToken = '';
+
 const badUser = {
   derp: 'halp',
   moreDerp: 'derppp',
@@ -34,6 +36,7 @@ describe('auth router', () => {
       return request.post(url + '/signup')
         .send(newUser)
         .then(res => {
+          userToken = res.text;
           expect(res.status).toBe(200);
         });
     });
@@ -66,8 +69,20 @@ describe('auth router', () => {
         .auth('goozgooz','derp')
         .then(res => {
           expect(res.status).toBe(200);
-          // console.log(jwt.verify(res.text, process.env.SECRET));
+          // console.log('verified ID ' + jwt.verify(res.text, process.env.SECRET).id);
         });
     });
   });
+
+  describe('update route', () => {
+    test('should return the info of the JWT owner', () => {
+      return request.put(url + '/update')
+        .set('Authorization', `Bearer ${userToken}`)
+        .then(res => {
+          expect(res.status).toBe(200);
+          expect(res.body.username).toBe('goozgooz');
+        });
+    });
+  });
+
 });

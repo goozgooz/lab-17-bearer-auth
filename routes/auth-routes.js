@@ -31,6 +31,10 @@ authRouter.get('/signin', basicHTTP, (req,res,next) => {
     });
 });
 
-authRouter.post('/update', bearAuth, (req,res,next) => {
-  res.send(200, req.token);
+authRouter.put('/update', bearAuth, (req,res,next) => {
+  User.findOne({_id: req.userId})
+    .then(user => {
+      res.status(200).send(user);
+    })
+    .catch(next);
 });
