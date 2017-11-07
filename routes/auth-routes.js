@@ -37,8 +37,6 @@ authRouter.put('/update', bearAuth, (req,res,next) => {
       if(!user) res.status(404).send('user not found');
       res.status(200).send(user);
     })
-    .catch(err => {
-      console.log('message' + err.message);
-    });
+    .catch(next);
 });
 
