@@ -3,6 +3,7 @@
 const User = require('../models/user.js');
 const jsonParser = require('body-parser').json();
 const basicHTTP = require('../lib/basic-http.js');
+const bearAuth = require('../lib/bear-auth.js');
 
 const authRouter = module.exports = require('express').Router();
 
@@ -28,4 +29,8 @@ authRouter.get('/signin', basicHTTP, (req,res,next) => {
         .then(user => res.send(user.generateToken()))
         .catch((err) => res.status(401).send(err.message));
     });
+});
+
+authRouter.post('/update', bearAuth, (req,res,next) => {
+  res.send(200, req.token);
 });
