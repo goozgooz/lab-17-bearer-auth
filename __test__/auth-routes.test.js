@@ -83,6 +83,22 @@ describe('auth router', () => {
           expect(res.body.username).toBe('goozgooz');
         });
     });
+    test('should return 401 if no token given', () => {
+      return request.put(url + '/update')
+        .set('Authorization', `Bearer `)
+        .catch(res => {
+          expect(res.status).toBe(401);
+        });
+    });
+    test('should return 400 if invalid token sent', () => {
+      return request.put(url + '/update')
+        .set('Authorization', `Bearer 6969`)
+        .catch(res => {
+          expect(res.status).toBe(400);
+        });
+    });
+
+
   });
 
 });

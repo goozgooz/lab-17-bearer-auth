@@ -34,7 +34,11 @@ authRouter.get('/signin', basicHTTP, (req,res,next) => {
 authRouter.put('/update', bearAuth, (req,res,next) => {
   User.findOne({_id: req.userId})
     .then(user => {
+      if(!user) res.status(404).send('user not found');
       res.status(200).send(user);
     })
-    .catch(next);
+    .catch(err => {
+      console.log('message' + err.message);
+    });
 });
+
