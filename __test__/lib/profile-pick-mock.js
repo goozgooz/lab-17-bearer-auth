@@ -7,7 +7,7 @@ const create = () => {
   let result = {};
   return userMock.create()
     .then(user => {
-      result.temUser = user;
+      result.tempUser = user;
       return new ProfilePic({
         url: 'https://avatars0.githubusercontent.com/u/1447359?s=460&v=4',
         account: user._id,
