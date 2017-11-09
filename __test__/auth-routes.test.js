@@ -21,7 +21,6 @@ const badUser = {
   derp: 'halp',
   moreDerp: 'derppp',
 };
-
 describe('auth router', () => {
   beforeAll(() => {
     server.start();
@@ -30,6 +29,7 @@ describe('auth router', () => {
   afterAll(() => {
     server.stop();
   });
+  
 
   describe('signup route', () =>{
     test('should return 200 if signup succesful', () => {
@@ -97,8 +97,6 @@ describe('auth router', () => {
           expect(res.status).toBe(400);
         });
     });
-
-
   });
 
 });
